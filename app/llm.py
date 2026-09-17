@@ -1,15 +1,12 @@
 import os
 import requests
 
-
 URL = "https://openrouter.ai/api/v1/chat/completions"
 
 API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-MODEL_NAME = "liquid/lfm-2.5-2.6b:free"
 
-
-def ask_llm(messages):
+def ask_llm(messages, model):
 
     headers = {
         "Authorization": f"Bearer {API_KEY}",
@@ -17,7 +14,7 @@ def ask_llm(messages):
     }
 
     data = {
-        "model": MODEL_NAME,
+        "model": model,
         "messages": messages
     }
 
@@ -28,13 +25,15 @@ def ask_llm(messages):
         timeout=60
     )
 
-    print("Status:", response.status_code)
-
     if response.status_code == 200:
+
         result = response.json()
+
         return result["choices"][0]["message"]["content"]
 
-    print("API Error:", response.status_code)
-    print(response.text)
+    else:
 
-    return None
+        print("API Error:", response.status_code)
+        print(response.text)
+
+        return None
