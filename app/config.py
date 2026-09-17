@@ -2,7 +2,7 @@ import os
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-MODEL_NAME = "YOUR_FREE_MODEL_ID"
+MODEL_NAME = "liquid/lfm-2.5-2.6b:free"
 
 SYSTEM_PROMPT = """
 You are a health informatics educational assistant.
